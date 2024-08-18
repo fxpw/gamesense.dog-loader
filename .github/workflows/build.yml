@@ -1,0 +1,64 @@
+name: Build and Deploy
+
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Get current date for release
+        id: release_date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M')"
+
+      - name: Get current date for tag
+        id: tag_date
+        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M')"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set short sha
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Restore dependencies
+        run: nuget restore ./gs/gs.sln
+
+      - name: Build project
+        run: msbuild ./gs/gs.sln /p:Configuration=Release
+
+      - name: Publish project
+        run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
+
+      - name: Zip project
+        run: Compress-Archive -Path "./gs/*" -DestinationPath gs.zip
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.vars.outputs.sha_short }}-${{ steps.tag_date.outputs.date }}
+          release_name: Release ${{ steps.release_date.outputs.date }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gs.zip
+          asset_name: gs.zip
+          asset_content_type: application/zip
+
+
