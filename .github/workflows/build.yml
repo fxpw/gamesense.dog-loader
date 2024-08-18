@@ -43,7 +43,7 @@ jobs:
           echo "Library Directories: $DXSDK_DIR/Libraries/DirectX/Lib"
 
       - name: Build project
-        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="$DXSDK_DIR/Libraries/DirectX/Include" /p:LibraryDirectories="$DXSDK_DIR/Libraries/DirectX/Lib"
+        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="kfx/Libraries/DirectX/Include" /p:LibraryDirectories="kfx/Libraries/DirectX/Lib"
 
       - name: Publish project
         run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
