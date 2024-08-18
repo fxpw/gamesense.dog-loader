@@ -34,9 +34,8 @@ jobs:
       - name: Build project
         run: msbuild ./gs.sln /p:Configuration=Release
 
-
       - name: Zip project
-        run: Compress-Archive -Path "./gs/*" -DestinationPath gs.zip
+        run: Compress-Archive -Path "./x64/*" -DestinationPath gs.zip
 
       - name: Create Release
         id: create_release
