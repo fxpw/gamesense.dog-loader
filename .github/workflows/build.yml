@@ -26,7 +26,7 @@ jobs:
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name:  Config
-        run:   echo ::set-env name=DXSDK_DIR::$HOME/cache/
+        run: echo "DXSDK_DIR=$HOME/cache/" >> $GITHUB_ENV
         shell: bash
 
       - name:  Cache create
