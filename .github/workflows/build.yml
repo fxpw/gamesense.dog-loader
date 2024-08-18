@@ -31,8 +31,19 @@ jobs:
       - name: Restore dependencies
         run: nuget restore ./gs.sln
 
+      - name: Download dxsdk
+        run: |
+          git clone https://github.com/apitrace/dxsdk.git
+          echo "DXSDK cloned successfully"
+
+      - name: Set Include and Library Directories
+        run: |
+          echo "##vso[task.setVariable variable=DXSDK_DIR]$(pwd)/dxsdk"
+          echo "Include Directories: $DXSDK_DIR/Include"
+          echo "Library Directories: $DXSDK_DIR/Lib/x64"
+
       - name: Build project
-        run: msbuild ./gs.sln /p:Configuration=Release
+        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="$DXSDK_DIR/Include" /p:LibraryDirectories="$DXSDK_DIR/Lib/x64"
 
       - name: Publish project
         run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
