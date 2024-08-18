@@ -34,8 +34,6 @@ jobs:
       - name: Build project
         run: msbuild ./gs.sln /p:Configuration=Release
 
-      - name: Publish project
-        run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false
 
       - name: Zip project
         run: Compress-Archive -Path "./gs/*" -DestinationPath gs.zip
