@@ -29,10 +29,10 @@ jobs:
         uses: microsoft/setup-msbuild@v1
 
       - name: Restore dependencies
-        run: nuget restore ./gs/gs.sln
+        run: nuget restore ./gs.sln
 
       - name: Build project
-        run: msbuild ./gs/gs.sln /p:Configuration=Release
+        run: msbuild ./gs.sln /p:Configuration=Release
 
       - name: Publish project
         run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
