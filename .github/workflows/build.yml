@@ -32,10 +32,10 @@ jobs:
         run: nuget restore ./gs.sln
 
       - name: Build project
-        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="kfx/Libraries/DirectX/Include" /p:LibraryDirectories="kfx/Libraries/DirectX/Lib"
+        run: msbuild ./gs.sln /p:Configuration=Release
 
       - name: Publish project
-        run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
+        run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false
 
       - name: Zip project
         run: Compress-Archive -Path "./gs/*" -DestinationPath gs.zip
