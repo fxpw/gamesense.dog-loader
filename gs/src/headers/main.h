@@ -5,8 +5,8 @@
 #include <dwmapi.h>
 #include <string>
 #include <D3DX11tex.h>
-#pragma comment(lib, "D3D11.lib")
-// #pragma comment(lib, "D3DX11.lib")
+// #pragma comment(lib, "D3D11.lib")
+#pragma comment(lib, "D3DX11.lib")
 
 #include "imgui.h"
 #include "imgui_internal.h"
