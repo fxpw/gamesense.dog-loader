@@ -65,8 +65,6 @@ typedef struct _D3DPSHADERCAPS2_0
 #define D3DMIN30SHADERINSTRUCTIONS 512
 #define D3DMAX30SHADERINSTRUCTIONS 32768
 
-/* D3D9Ex only -- */
-#if !defined(D3D_DISABLE_9EX)
 
 typedef struct _D3DOVERLAYCAPS
 {
@@ -115,8 +113,6 @@ DEFINE_GUID(D3DKEYEXCHANGE_RSAES_OAEP,
 DEFINE_GUID(D3DKEYEXCHANGE_DXVA, 
 0x43d3775c, 0x38e5, 0x4924, 0x8d, 0x86, 0xd3, 0xfc, 0xcf, 0x15, 0x3e, 0x9b);
 
-#endif // !D3D_DISABLE_9EX
-/* -- D3D9Ex only */
 
 typedef struct _D3DCAPS9
 {
@@ -564,4 +560,5 @@ typedef struct _D3DCAPS9
 
 #endif /* (DIRECT3D_VERSION >= 0x0900) */
 #endif /* _d3d9CAPS_H_ */
+
 

@@ -2612,11 +2612,6 @@ typedef struct IDirect3DSwapChain9Ex *LPDIRECT3DSWAPCHAIN9EX, *PDIRECT3DSWAPCHAI
 
 
 
-/* D3D9Ex only -- */
-#if !defined(D3D_DISABLE_9EX)
-
-
-
 #undef INTERFACE
 #define INTERFACE IDirect3D9ExOverlayExtension
 
@@ -2778,9 +2773,6 @@ typedef struct IDirect3DCryptoSession9 *LPDIRECT3DCRYPTOSESSION9, *PDIRECT3DCRYP
 #define IDirect3DCryptoSession9_GetEncryptionBltKey(p,a,b) (p)->GetEncryptionBltKey(a,b)
 #endif
 
-/* -- D3D9Ex only */
-#endif // !D3D_DISABLE_9EX
-
 
 #ifdef __cplusplus
 };
@@ -2788,4 +2780,5 @@ typedef struct IDirect3DCryptoSession9 *LPDIRECT3DCRYPTOSESSION9, *PDIRECT3DCRYP
 
 #endif /* (DIRECT3D_VERSION >= 0x0900) */
 #endif /* _D3D_H_ */
+
 

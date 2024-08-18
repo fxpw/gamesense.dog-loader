@@ -1472,13 +1472,8 @@ typedef enum _D3DSWAPEFFECT
     D3DSWAPEFFECT_DISCARD           = 1,
     D3DSWAPEFFECT_FLIP              = 2,
     D3DSWAPEFFECT_COPY              = 3,
-
-/* D3D9Ex only -- */
-#if !defined(D3D_DISABLE_9EX)
     D3DSWAPEFFECT_OVERLAY           = 4,
     D3DSWAPEFFECT_FLIPEX            = 5,
-#endif // !D3D_DISABLE_9EX
-/* -- D3D9Ex only */
 
     D3DSWAPEFFECT_FORCE_DWORD       = 0x7fffffff
 } D3DSWAPEFFECT;
@@ -1938,7 +1933,6 @@ typedef struct _D3DDEVINFO_D3D9CACHEUTILIZATION
     FLOAT PostTransformVertexCacheHitRate;
 } D3DDEVINFO_D3D9CACHEUTILIZATION;
 
-/* D3D9Ex only -- */
 #if !defined(D3D_DISABLE_9EX)
 
 typedef struct _D3DMEMORYPRESSURE
@@ -1947,6 +1941,11 @@ typedef struct _D3DMEMORYPRESSURE
     UINT64  SizeOfInefficientAllocation;
     DWORD   LevelOfEfficiency;
 } D3DMEMORYPRESSURE;
+
+#endif
+
+/* D3D9Ex only -- */
+#if !defined(D3D_DISABLE_9EX)
 
 typedef enum _D3DCOMPOSERECTSOP{
     D3DCOMPOSERECTS_COPY     = 1,
@@ -2413,4 +2412,5 @@ typedef struct _D3DAES_CTR_IV
 
 #endif /* (DIRECT3D_VERSION >= 0x0900) */
 #endif /* _d3d9TYPES(P)_H_ */
+
 
