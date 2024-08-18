@@ -31,17 +31,6 @@ jobs:
       - name: Restore dependencies
         run: nuget restore ./gs.sln
 
-      - name: Download dxsdk
-        run: |
-          git clone https://github.com/KTXSoftware/kfx.git
-          echo "DXSDK cloned successfully"
-
-      - name: Set Include and Library Directories
-        run: |
-          echo "##vso[task.setVariable variable=DXSDK_DIR]$(pwd)/kfx"
-          echo "Include Directories: $DXSDK_DIR/Libraries/DirectX/Include"
-          echo "Library Directories: $DXSDK_DIR/Libraries/DirectX/Lib"
-
       - name: Build project
         run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="kfx/Libraries/DirectX/Include" /p:LibraryDirectories="kfx/Libraries/DirectX/Lib"
 
