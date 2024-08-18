@@ -33,17 +33,17 @@ jobs:
 
       - name: Download dxsdk
         run: |
-          git clone https://github.com/apitrace/dxsdk.git
+          git clone https://github.com/KTXSoftware/kfx.git
           echo "DXSDK cloned successfully"
 
       - name: Set Include and Library Directories
         run: |
-          echo "##vso[task.setVariable variable=DXSDK_DIR]$(pwd)/dxsdk"
-          echo "Include Directories: $DXSDK_DIR/Include"
-          echo "Library Directories: $DXSDK_DIR/Lib/x64"
+          echo "##vso[task.setVariable variable=DXSDK_DIR]$(pwd)/kfx"
+          echo "Include Directories: $DXSDK_DIR/Libraries/DirectX/Include"
+          echo "Library Directories: $DXSDK_DIR/Libraries/DirectX/Lib"
 
       - name: Build project
-        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="$DXSDK_DIR/Include" /p:LibraryDirectories="$DXSDK_DIR/Lib/x64"
+        run: msbuild ./gs.sln /p:Configuration=Release /p:IncludeDirectories="$DXSDK_DIR/Libraries/DirectX/Include" /p:LibraryDirectories="$DXSDK_DIR/Libraries/DirectX/Lib"
 
       - name: Publish project
         run: dotnet publish ./gs/gs.csproj -c Release -o ./gs --self-contained false /p:PublishSingleFile=true
