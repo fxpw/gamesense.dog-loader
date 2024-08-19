@@ -32,7 +32,7 @@ jobs:
         run: nuget restore ./gs.sln
 
       - name: Build project
-        run: msbuild ./gs.sln /p:Configuration=Release
+        run: msbuild ./gs.sln /p:Configuration=Debug
 
       - name: Zip project
         run: Compress-Archive -Path "./x64/*" -DestinationPath gs.zip
