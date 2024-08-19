@@ -2,10 +2,7 @@
 #include "settings.h"
 #include "images.h"
 #include <algorithm>
-template<typename T>
-T clamp(const T& value, const T& low, const T& high) {
-    return std::max(low, std::min(value, high));
-}
+
 void ui::Before_Loop()
 {
     if (images::CS == nullptr) D3DX11CreateShaderResourceViewFromMemory(g_pd3dDevice, CS_p, sizeof(CS_p), nullptr, nullptr, &images::CS, 0);
@@ -87,7 +84,7 @@ void ui::render()
             time += 0.005;
             static float c = 1.0;
 
-            c = ((int)time % 2 == 0) ? clamp(c + (1.f - c) * io.DeltaTime * 5, 0.0f, 1.0f) : clamp(c + (0.3f - c) * io.DeltaTime * 3, 0.0f, 1.0f);
+            c = ((int)time % 2 == 0) ? std::clamp(c + (1.f - c) * io.DeltaTime * 5, 0.0f, 1.0f) : std::clamp(c + (0.3f - c) * io.DeltaTime * 3, 0.0f, 1.0f);
 
             ImVec4 text_color = ImVec4(1.f, 1.f, 1.f, c);
 
