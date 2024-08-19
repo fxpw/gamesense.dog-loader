@@ -1,6 +1,6 @@
-#pragma once
 #include "main.h"
-
+#ifndef SETTINGS_H
+#define SETTINGS_H
 inline ID3D11Device* g_pd3dDevice = nullptr;
 inline ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
 inline IDXGISwapChain* g_pSwapChain = nullptr;
@@ -16,3 +16,6 @@ inline char username[20] = "";
 inline char password[20] = "";
 
 inline bool done = false;
+
+
+#endif // SETTINGS_H
